@@ -109,6 +109,9 @@ const useStore = create((set, get) => ({
   imageUrls: loadFromStorage('wardrobe_image_urls', {}),
   itemNotes: loadFromStorage('wardrobe_item_notes', {}),
 
+  // Fit Cards State - saved outfit combinations (over/top/bottom/shoes)
+  fitCards: loadFromStorage('fitCards', []),
+
   // Grooming State
   groomingData: loadFromStorage('groomingData', {
     am: [
@@ -285,6 +288,12 @@ const useStore = create((set, get) => ({
     saveToStorage('wardrobe_item_notes', itemNotes);
   },
 
+  // Actions for Fit Cards
+  updateFitCards: (fitCards) => {
+    set({ fitCards });
+    saveToStorage('fitCards', fitCards);
+  },
+
   // Actions for Grooming
   updateGrooming: (groomingData) => {
     set({ groomingData });
@@ -406,6 +415,8 @@ const useStore = create((set, get) => ({
       brandUrls: loadFromStorage('wardrobe_brand_urls', {}),
       wishlistUrls: loadFromStorage('wardrobe_wishlist_urls', {}),
       imageUrls: loadFromStorage('wardrobe_image_urls', {}),
+      itemNotes: loadFromStorage('wardrobe_item_notes', {}),
+      fitCards: loadFromStorage('fitCards', []),
       groomingData: loadFromStorage('groomingData', {
         am: [
           ['Gentle Cleanser', 'CeraVe Hydrating Cleanser'],

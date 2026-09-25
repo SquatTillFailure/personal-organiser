@@ -14,6 +14,7 @@ import { getSupabase } from './supabaseClient';
  *   wardrobe_brand_urls JSONB,
  *   wardrobe_wishlist_urls JSONB,
  *   wardrobe_image_urls JSONB,
+ *   fit_cards JSONB,
  *   grooming_data JSONB,
  *   blueprint_data JSONB,
  *   daily_reflection JSONB,
@@ -123,6 +124,7 @@ class SyncService {
         wardrobe_brand_urls: JSON.parse(localStorage.getItem('wardrobe_brand_urls') || 'null'),
         wardrobe_wishlist_urls: JSON.parse(localStorage.getItem('wardrobe_wishlist_urls') || 'null'),
         wardrobe_image_urls: JSON.parse(localStorage.getItem('wardrobe_image_urls') || 'null'),
+        fit_cards: JSON.parse(localStorage.getItem('fitCards') || 'null'),
         grooming_data: JSON.parse(localStorage.getItem('groomingData') || 'null'),
         blueprint_data: JSON.parse(localStorage.getItem('blueprintData') || 'null'),
         daily_reflection: JSON.parse(localStorage.getItem('dailyReflection') || 'null'),
@@ -198,6 +200,7 @@ class SyncService {
         hasChanges = this.updateLocalStorageIfChanged('wardrobe_brand_urls', data.wardrobe_brand_urls) || hasChanges;
         hasChanges = this.updateLocalStorageIfChanged('wardrobe_wishlist_urls', data.wardrobe_wishlist_urls) || hasChanges;
         hasChanges = this.updateLocalStorageIfChanged('wardrobe_image_urls', data.wardrobe_image_urls) || hasChanges;
+        hasChanges = this.updateLocalStorageIfChanged('fitCards', data.fit_cards) || hasChanges;
         hasChanges = this.updateLocalStorageIfChanged('groomingData', data.grooming_data) || hasChanges;
         hasChanges = this.updateLocalStorageIfChanged('blueprintData', data.blueprint_data) || hasChanges;
         hasChanges = this.updateLocalStorageIfChanged('dailyReflection', data.daily_reflection) || hasChanges;

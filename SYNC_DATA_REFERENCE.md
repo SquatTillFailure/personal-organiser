@@ -14,6 +14,9 @@ All of the following data is automatically synchronized across all your devices:
 - ✅ Wishlist URLs
 - ✅ Image URLs
 
+### Fit Cards Tab
+- ✅ Saved fit cards (over, top, bottom, shoes, notes)
+
 ### Grooming Tab
 - ✅ All grooming routines (AM, PM, shaving, hair, perfumes, supplements)
 
@@ -58,6 +61,7 @@ All synced data is stored in the `user_data` table with these columns:
 | wardrobe_brand_urls | JSONB | Brand URLs |
 | wardrobe_wishlist_urls | JSONB | Wishlist URLs |
 | wardrobe_image_urls | JSONB | Image URLs |
+| fit_cards | JSONB | Saved fit cards |
 | grooming_data | JSONB | Grooming routines |
 | blueprint_data | JSONB | Blueprint/intentions |
 | daily_reflection | JSONB | Daily reflections |
