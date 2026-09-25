@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS user_data (
   wardrobe_brand_urls JSONB,
   wardrobe_wishlist_urls JSONB,
   wardrobe_image_urls JSONB,
+  -- Fit cards: saved outfit combinations (over, top, bottom, shoes, notes)
+  fit_cards JSONB,
   grooming_data JSONB,
   blueprint_data JSONB,
   daily_reflection JSONB,
@@ -119,6 +121,16 @@ BEGIN
     ) THEN
         ALTER TABLE user_data ADD COLUMN blueprint_data JSONB;
         RAISE NOTICE 'Added blueprint_data column';
+    END IF;
+
+    -- Add fit_cards column if missing
+    -- Stores saved outfit combinations: over, top, bottom, shoes, notes
+    IF NOT EXISTS (
+        SELECT 1 FROM information_schema.columns
+        WHERE table_name = 'user_data' AND column_name = 'fit_cards'
+    ) THEN
+        ALTER TABLE user_data ADD COLUMN fit_cards JSONB;
+        RAISE NOTICE 'Added fit_cards column';
     END IF;
 
     RAISE NOTICE 'Migration complete - all columns verified/added';

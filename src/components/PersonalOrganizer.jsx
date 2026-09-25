@@ -3,6 +3,8 @@ import { Plus, Trash2, X, ShoppingCart, ExternalLink, Heart, Settings, GripVerti
 import GroomingJournal from './GroomingJournal';
 import Todo from './Todo';
 import SyncSettings from './SyncSettings';
+import FitCards from './FitCards';
+import FitRules from './FitRules';
 import useStore from '../store';
 import { initializeSupabase } from '../services/supabaseClient';
 import { syncService } from '../services/syncService';
@@ -14,6 +16,7 @@ const PersonalOrganizer = () => {
   const wishlist = useStore((state) => state.wishlist);
   const brandUrls = useStore((state) => state.brandUrls);
   const wishlistUrls = useStore((state) => state.wishlistUrls);
+  const fitCards = useStore((state) => state.fitCards);
   const mediaData = useStore((state) => state.mediaData);
   const groomingData = useStore((state) => state.groomingData);
   const dailyReflection = useStore((state) => state.dailyReflection);
@@ -156,7 +159,7 @@ const PersonalOrganizer = () => {
         clearTimeout(syncTimeoutRef.current);
       }
     };
-  }, [categories, wardrobeData, wishlist, brandUrls, wishlistUrls, mediaData, groomingData, dailyReflection, weeklyTracker, weightData, supabaseUrl, supabaseAnonKey, userId]);
+  }, [categories, wardrobeData, wishlist, brandUrls, wishlistUrls, fitCards, mediaData, groomingData, dailyReflection, weeklyTracker, weightData, supabaseUrl, supabaseAnonKey, userId]);
 
   // Real-time polling for cross-device sync (check every 10 seconds)
   useEffect(() => {
@@ -510,6 +513,9 @@ const PersonalOrganizer = () => {
         {/* Sync Settings Modal */}
         <SyncSettings isOpen={showSyncSettings} onClose={() => setShowSyncSettings(false)} />
 
+        {/* Fit Rules Summary - always visible */}
+        <FitRules />
+
         {/* Tab Navigation */}
         <div className="flex gap-1 sm:gap-2 mb-4 sm:mb-6 border-b border-slate-200 overflow-x-auto">
           <button
@@ -521,6 +527,16 @@ const PersonalOrganizer = () => {
             }`}
           >
             Wardrobe
+          </button>
+          <button
+            onClick={() => setActiveTab('fitcards')}
+            className={`px-3 sm:px-6 py-2 sm:py-3 font-semibold text-xs sm:text-sm transition-all duration-200 border-b-2 whitespace-nowrap ${
+              activeTab === 'fitcards'
+                ? 'border-indigo-600 text-indigo-600'
+                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+            }`}
+          >
+            Fit Cards
           </button>
         </div>
 
@@ -759,6 +775,8 @@ const PersonalOrganizer = () => {
           </>
         )}
 
+        {/* Fit Cards Tab Content */}
+        {activeTab === 'fitcards' && <FitCards />}
 
       </div>
 
